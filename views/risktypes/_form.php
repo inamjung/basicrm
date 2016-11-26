@@ -12,14 +12,29 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'programe_id')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <?=
+            $form->field($model, 'programe_id')->widget(kartik\select2\Select2::className(), [
+                'data' => \yii\helpers\ArrayHelper::map(app\models\Programes::find()->all(), 'id', 'name'),
+                'options' => [
+                    'placeholder' => '-- เลือก--'
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ]
+            ])
+            ?>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <div class="form-group">
+    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+<?php ActiveForm::end(); ?>
 
 </div>
