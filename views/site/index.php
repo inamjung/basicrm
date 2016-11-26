@@ -10,3 +10,6 @@ $this->title = 'My Yii Application';
         <?php echo html::img('@web/img/rm.png',['class'=>'img-responsve center-block'])?>
     </div>
 </div>
+<div>
+    
+</div>
