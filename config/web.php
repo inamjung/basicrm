@@ -5,6 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'name'=>'<img style="height:40px; margih-top:12px:" src="./img/rm.png"> BASICRM',
+    'language'=>'th_TH',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
