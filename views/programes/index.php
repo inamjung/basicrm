@@ -12,15 +12,20 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="programes-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1><?= Html::encode($this->title) ?></h1>-->
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Programes', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูล', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <div class="panel panel-info">
+        <div class="panel-heading"> รายการโปรแกรม</div>
+        <div class="panel-body">
+            <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'hover'=>true,  
+        'striped'=>FALSE,        
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -36,4 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+        </div>
+    </div> 
 </div>
