@@ -19,7 +19,7 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li class="treeview active"> 
+            <li class="treeview"> 
                 <a href="#">
                     <i class="glyphicon glyphicon-cog"></i> <span>ตั้งค่าระบบ</span>
                     <i class="fa pull-right fa-angle-down"></i>
@@ -43,6 +43,23 @@
                         <small class="label pull-right bg-blue"></small>
                         </a>
                     </li>
+                </ul>
+        </ul> 
+        
+        <ul class="sidebar-menu">
+            <li class="treeview active"> 
+                <a href="#">
+                    <i class="glyphicon glyphicon-cog"></i> <span>ความเสี่ยง</span>
+                    <i class="fa pull-right fa-angle-down"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo Url::to(['riskreports/index'])?>">
+                        <i class="fa fa-circle text-green"></i> 
+                        <span> คลินิก</span> 
+                        <small class="label pull-right bg-blue"></small>
+                        </a>
+                    </li>
+                    
                 </ul>
         </ul> 
 

@@ -72,7 +72,7 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'edit')->inline()->radioList(app\models\Riskreports::itemAlias('edit')) ?>
 
     <?= $form->field($model, 'user_id_report')->textInput(['maxlength' => true]) ?>
-            ?>
+           
 
     <?= $form->field($model, 'department_id')->widget(Select2::className(), [
                         'data' =>  ArrayHelper::map(\app\models\Departments::find()->all(), 'id', 'name'),
