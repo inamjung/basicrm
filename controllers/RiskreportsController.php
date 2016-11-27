@@ -8,6 +8,15 @@ use app\models\RiskreportsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\models\Clinics;
+use yii\models\Programes;
+use yii\models\Risktypes;
+use kartik\widgets\DepDrop;
+use yii\helpers\ArrayHelper;
+use yii\helpers\BaseFileHelper;
+use yii\helpers\html;
 
 /**
  * RiskreportsController implements the CRUD actions for Riskreports model.
@@ -84,11 +93,17 @@ class RiskreportsController extends Controller
     {
         $model = $this->findModel($id);
 
+        $programe = ArrayHelper::map($this->getPrograme($model->clinic_id),'id','name');
+        $risktype = ArrayHelper::map($this->getRisktype($model->programe_id),'id','name');
+        
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'programe'=>$programe,
+                'risktype'=>$risktype,
             ]);
         }
     }
@@ -120,5 +135,49 @@ class RiskreportsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionGetPrograme(){
+        $out = [];
+        if (isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != NULL){
+                $clinic_id = $parents[0];
+                $out = $this->getPrograme($clinic_id);
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }    
+    public function actionGetRisktype(){
+        $out = [];
+        if (isset($_POST['depdrop_parents'])){
+            $ids = $_POST['depdrop_parents'];
+            $clinic_id = empty($ids[0]) ? NULL : $ids[0];
+            $programe_id = empty($ids[1]) ? NULL : $ids[1];
+            if ($clinic_id !=NULL){
+                $data = $this->getRisktype($programe_id);
+                echo Json::encode(['output'=>$data, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }     
+    protected function getPrograme($id){
+        $datas = \app\models\Programes::find()->where(['clinic_id'=>$id])->all();
+        return $this->MapData($datas,'id','name');
+    }
+    
+    protected function getRisktype($id){
+        $datas = \app\models\Risktypes::find()->where(['programe_id'=>$id])->orderBy('name ASC')->all();
+        return $this->MapData($datas,'id','name');
+    }    
+    protected function MapData($datas,$fieldID,$fieldName){
+        $obj = [];
+        foreach ($datas as $key => $value){
+            array_push($obj, ['id'=>$value->{$fieldID},'name'=>$value->{$fieldName}]);
+        }
+        return $obj;
     }
 }

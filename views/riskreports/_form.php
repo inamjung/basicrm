@@ -2,6 +2,16 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
+use yii\models\Clinics;
+use yii\models\Programes;
+use yii\models\Risktypes;
+use kartik\depdrop\DepDrop;
+use kartik\checkbox\CheckboxX;
+use yii\helpers\Url;
+use dosamigos\datepicker\DatePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Riskreports */
@@ -11,20 +21,49 @@ use yii\widgets\ActiveForm;
 <div class="riskreports-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    
+    <?= $form->field($model, 'date')->widget(
+    DatePicker::className(), [
+        // inline too, not bad
+        'language'=>'th',
+         'inline' => FALSE, 
+         // modify template for custom rendering       
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd',
+            'todayHighlight'=>true
+        ]
+]);?>
+    
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    <?=
+            $form->field($model, 'clinic_id')->widget(Select2::className(), [
+                'data' =>  ArrayHelper::map(app\models\Clinics::find()->all(), 'id', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกประเภทคลินิก-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
-    <?= $form->field($model, 'clinic_id')->textInput() ?>
-
-    <?= $form->field($model, 'programe_id')->textInput() ?>
-
-    <?= $form->field($model, 'risktype_id')->textInput() ?>
+   
 
     <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'namecode')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>  
+    
+    <?= $form->field($model, 'namecode')->widget(Select2::className(), [
+                'data' =>  ArrayHelper::map(\app\models\Levels::find()->all(), 'namecode', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกประเภทระดับความเสี่ยง->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
     <?= $form->field($model, 'sufferer')->textInput(['maxlength' => true]) ?>
 
