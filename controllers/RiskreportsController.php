@@ -76,6 +76,7 @@ class RiskreportsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             
+            $model->createDate = date('Y-m-d');
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
