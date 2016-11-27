@@ -85,6 +85,22 @@ class RiskreportsController extends Controller
             ]);
         }
     }
+    
+    public function actionCreateuser()
+    {
+        $model = new Riskreports();
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $model->createDate = date('Y-m-d');
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('createuser', [
+                'model' => $model,
+            ]);
+        }
+    }
 
     /**
      * Updates an existing Riskreports model.
