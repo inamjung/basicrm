@@ -8,7 +8,7 @@ use kartik\select2\Select2;
 use yii\models\Clinics;
 use yii\models\Programes;
 use yii\models\Risktypes;
-use kartik\depdrop\DepDrop;
+use kartik\widgets\DepDrop;
 use kartik\checkbox\CheckboxX;
 use yii\helpers\Url;
 use dosamigos\datepicker\DatePicker;
@@ -49,8 +49,35 @@ use dosamigos\datepicker\DatePicker;
                         ],
                     ]);
             ?>
+    <?=
+            $form->field($model, 'programe_id')->widget(DepDrop::className(), [
+                        'data' => [$programe],
+                        'options' => ['placeholder' => '<--คลิกเลือกหรือพิมพ์ชื่อโปรแกรม-->'],
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                        'pluginOptions' => [
+                            'depends' => ['riskreports-clinic_id'],            
+                            'url' => yii\helpers\Url::to(['/riskreports/get-programe']),
+                            'loadingText' => 'Loading1...',
+                        ],
+                    ]);
+            ?>
 
-   
+   <?=
+            $form->field($model, 'risktype_id')->widget(DepDrop::className(), [
+                        'data' => [$risktype],
+                        'options' => ['placeholder' => '<--คลิกเลือกหรือพิมพ์รายการความเสี่ยง-->',
+                            'disabled'=>true, 
+                            ],                        
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                        'pluginOptions' => [
+                            'depends' => ['riskreports-clinic_id', 'riskreports-programe_id'],            
+                            'url' => yii\helpers\Url::to(['/riskreports/get-risktype']),
+                            'loadingText' => 'Loading2...',
+                        ],
+                    ]);
+            ?>
 
     <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 
