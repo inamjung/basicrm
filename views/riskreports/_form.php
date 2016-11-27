@@ -67,7 +67,7 @@ use dosamigos\datepicker\DatePicker;
             $form->field($model, 'risktype_id')->widget(DepDrop::className(), [
                         'data' => [$risktype],
                         'options' => ['placeholder' => '<--คลิกเลือกหรือพิมพ์รายการความเสี่ยง-->',
-                            'disabled'=>true, 
+                            //'disabled'=>true, 
                             ],                        
                         'type' => DepDrop::TYPE_SELECT2,
                         'select2Options' => ['pluginOptions' => ['allowClear' => true]],
@@ -122,6 +122,7 @@ use dosamigos\datepicker\DatePicker;
                         ],
                     ]);
             ?>
+     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'edit_begin')->textarea(['rows' => 6]) ?>
 

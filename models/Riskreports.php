@@ -187,4 +187,23 @@ class Riskreports extends \yii\db\ActiveRecord
             return isset($_items[$type]) ? $_items[$type] : false;    
         }
     }
+    
+    public function getRiskclinic(){
+        return $this->hasOne(Clinics::className(), ['id'=>'clinic_id']);
+    }
+    public function getRiskprograme(){
+        return $this->hasOne(Programes::className(), ['id'=>'programe_id']);
+    }
+    public function getRiskrisktype(){
+        return $this->hasOne(Risktypes::className(), ['id'=>'risktype_id']);
+    }
+    public function getRiskdepartment(){
+        return $this->hasOne(Departments::className(), ['id'=>'department_id']);
+    }
+     public function getRiskdepartmentrisk(){
+        return $this->hasOne(DepartmentsRisk::className(), ['id'=>'department_id_risk']);
+    }
+    public function getRiskuserreport(){
+        return $this->hasOne(Users::className(), ['id'=>'user_id_report']);
+    }
 }
