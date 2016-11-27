@@ -70,11 +70,38 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'edit')->inline()->radioList(app\models\Riskreports::itemAlias('edit')) ?>
 
-    <?= $form->field($model, 'user_id_report')->textInput() ?>
+    <?= $form->field($model, 'user_id_report')->widget(Select2::className(), [
+                        'data' =>  ArrayHelper::map(app\models\User::find()->all(), 'id', 'username'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกผู้รายงาน-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
-    <?= $form->field($model, 'department_id')->textInput() ?>
+    <?= $form->field($model, 'department_id')->widget(Select2::className(), [
+                        'data' =>  ArrayHelper::map(\app\models\Departments::find()->all(), 'id', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกหน่วยงานที่รายงาน-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
-    <?= $form->field($model, 'department_id_risk')->textInput() ?>
+    <?= $form->field($model, 'department_id_risk')->widget(Select2::className(), [
+                        'data' =>  ArrayHelper::map(app\models\DepartmentsRisk::find()->all(), 'id', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกพื้นที่เกิดเหตุ-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
     <?= $form->field($model, 'edit_begin')->textarea(['rows' => 6]) ?>
 
@@ -107,7 +134,9 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'reviewteam')->textInput(['maxlength' => true]) ?>
 
-   
+    <?= $form->field($model, 'approve')->textInput() ?>
+
+    <?= $form->field($model, 'qaapprove')->textInput() ?>
 
     <?= $form->field($model, 'review_in')->textInput(['maxlength' => true]) ?>
 
@@ -128,7 +157,20 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'qateam')->textInput(['maxlength' => true]) ?>
 
-    
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'covenant')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'docs')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'ref')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'complete')->textInput() ?>
+
+    <?= $form->field($model, 'createDate')->textInput() ?>
+
+    <?= $form->field($model, 'updateDate')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
