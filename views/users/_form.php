@@ -12,51 +12,51 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['readonly'=>true,'maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['readonly'=>true,'maxlength' => true]) ?>
+    
+     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'department_id')->widget(kartik\widgets\Select2::className(),[
+        'data'=>  yii\helpers\ArrayHelper::map(app\models\Departments::find()->all(), 'id', 'name'),
+        'options'=>[
+            'placeholder'=>'ระบุหน่วยงาน'
+        ],
+        'pluginOptions'=>[
+            'allowClear'=>true
+        ]
+    ]) ?>    
 
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'position_id')->widget(kartik\widgets\Select2::className(),[
+        'data'=>  yii\helpers\ArrayHelper::map(app\models\Positions::find()->all(), 'id', 'name'),
+        'options'=>[
+            'placeholder'=>'ระบุตำแหน่ง'
+        ],
+        'pluginOptions'=>[
+            'allowClear'=>true
+        ]
+    ]) ?>
 
-    <?= $form->field($model, 'confirmation_token')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'degree_id')->widget(kartik\widgets\Select2::className(),[
+        'data'=>  yii\helpers\ArrayHelper::map(app\models\Degrees::find()->all(), 'id', 'name'),
+        'options'=>[
+            'placeholder'=>'ระบุประเภท'
+        ],
+        'pluginOptions'=>[
+            'allowClear'=>true
+        ]
+    ]) ?>
 
-    <?= $form->field($model, 'confirmation_sent_at')->textInput() ?>
-
-    <?= $form->field($model, 'confirmed_at')->textInput() ?>
-
-    <?= $form->field($model, 'unconfirmed_email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'recovery_token')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'recovery_sent_at')->textInput() ?>
-
-    <?= $form->field($model, 'blocked_at')->textInput() ?>
-
-    <?= $form->field($model, 'registered_from')->textInput() ?>
-
-    <?= $form->field($model, 'logged_in_from')->textInput() ?>
-
-    <?= $form->field($model, 'logged_in_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'registration_ip')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'department_id')->textInput() ?>
-
-    <?= $form->field($model, 'role')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'position_id')->textInput() ?>
-
-    <?= $form->field($model, 'degree_id')->textInput() ?>
-
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'depname')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'depname')->widget(kartik\widgets\Select2::className(),[
+        'data'=>  yii\helpers\ArrayHelper::map(app\models\Departments::find()->all(), 'name', 'name'),
+        'options'=>[
+            'placeholder'=>'ยืนยันหน่วยงาน'
+        ],
+        'pluginOptions'=>[
+            'allowClear'=>true
+        ]
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
