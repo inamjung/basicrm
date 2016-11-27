@@ -1,6 +1,10 @@
 <?php
     use yii\helpers\Url;
+    use yii\bootstrap\Nav;
 ?>
+
+
+
 
 <aside class="main-sidebar">
 
@@ -17,6 +21,25 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
+        
+        <?=
+        Nav::widget(
+                [
+                    'encodeLabels' => false,
+                    'options' => ['class' => 'sidebar-menu'],
+                    'items' => [
+                        '<li class="header"></li>',
+                        Yii::$app->user->isGuest ?
+                                ['label' => '<i class="glyphicon glyphicon-log-in"></i> เข้าสู่ระบบ', 'url' => ['/user/security/login']] :
+                                ['label' => 'ผู้ใช้งาน (' . Yii::$app->user->identity->username . ')', 'items' => [
+                                ['label' => 'ข้อมูลส่วนตัว', 'url' => ['/users/indexuser']],
+
+                                ['label' => 'Logout', 'url' => ['/user/security/logout'], 'linkOptions' => ['data-method' => 'post']],
+                            ]],
+                    ],
+                ]
+        );
+        ?>
         
         <ul class="sidebar-menu">
             <li class="treeview"> 
