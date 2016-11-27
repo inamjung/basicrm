@@ -47,6 +47,7 @@ class UsersController extends Controller
     public function actionIndexuser()
     {
         $searchModel = new UsersSearch();
+        $searchModel->id = Yii::$app->user->identity->id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('indexuser', [
