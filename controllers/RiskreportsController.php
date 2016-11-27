@@ -52,6 +52,18 @@ class RiskreportsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    public function actionIndexriskuser()
+    {
+        $searchModel = new RiskreportsSearch();
+        $searchModel->department_id = Yii::$app->user->identity->depname;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexriskuser', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single Riskreports model.

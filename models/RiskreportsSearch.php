@@ -18,8 +18,8 @@ class RiskreportsSearch extends Riskreports
     public function rules()
     {
         return [
-            [['id', 'clinic_id', 'programe_id', 'risktype_id', 'user_id_report', 'department_id', 'department_id_risk', 'review', 'approve', 'qaapprove', 'complete'], 'integer'],
-            [['date', 'name', 'description', 'namecode', 'sufferer', 'edit', 'edit_begin', 'moneydetail', 'how', 'reviewdate', 'reviewdetail', 'reviewteam', 'review_in', 'review_by', 'review_dateline', 'qateam', 'username', 'covenant', 'docs', 'ref', 'createDate', 'updateDate'], 'safe'],
+            [['id', 'clinic_id', 'programe_id', 'risktype_id', 'user_id_report',  'review', 'approve', 'qaapprove', 'complete'], 'integer'],
+            [['department_id', 'department_id_risk','date', 'name', 'description', 'namecode', 'sufferer', 'edit', 'edit_begin', 'moneydetail', 'how', 'reviewdate', 'reviewdetail', 'reviewteam', 'review_in', 'review_by', 'review_dateline', 'qateam', 'username', 'covenant', 'docs', 'ref', 'createDate', 'updateDate'], 'safe'],
             [['money'], 'number'],
         ];
     }
@@ -59,6 +59,9 @@ class RiskreportsSearch extends Riskreports
         }
 
         // grid filtering conditions
+        $dataProvider->query->joinWith('riskdepartment');
+        $dataProvider->query->joinWith('riskdepartmentrisk');
+        
         $query->andFilterWhere([
             'id' => $this->id,
             'date' => $this->date,
@@ -66,8 +69,8 @@ class RiskreportsSearch extends Riskreports
             'programe_id' => $this->programe_id,
             'risktype_id' => $this->risktype_id,
             'user_id_report' => $this->user_id_report,
-            'department_id' => $this->department_id,
-            'department_id_risk' => $this->department_id_risk,
+            //'department_id' => $this->department_id,
+            //'department_id_risk' => $this->department_id_risk,
             'money' => $this->money,
             'review' => $this->review,
             'reviewdate' => $this->reviewdate,
@@ -95,7 +98,10 @@ class RiskreportsSearch extends Riskreports
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'covenant', $this->covenant])
             ->andFilterWhere(['like', 'docs', $this->docs])
-            ->andFilterWhere(['like', 'ref', $this->ref]);
+            ->andFilterWhere(['like', 'ref', $this->ref])
+            ->andFilterWhere(['like', 'departments.name', $this->department_id])
+            ->andFilterWhere(['like', 'departments_risk.name', $this->department_id_risk])    
+                ;
 
         return $dataProvider;
     }
