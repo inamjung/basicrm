@@ -58,8 +58,6 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'sufferer')->inline()->radioList(app\models\Riskreports::itemAlias('sufferer')) ?>
 
     <?= $form->field($model, 'edit')->inline()->radioList(app\models\Riskreports::itemAlias('edit')) ?>
-
-    <?= $form->field($model, 'user_id_report')->textInput(['maxlength' => true]) ?>
            
 
     <?= $form->field($model, 'department_id')->widget(Select2::className(), [
@@ -69,6 +67,20 @@ use dosamigos\datepicker\DatePicker;
                         'pluginOptions' =>
                         [
                             'allowClear' => true
+                        ],
+                    ]);
+            ?>
+    
+    <?=
+            $form->field($model, 'user_id_report')->widget(DepDrop::className(), [
+                        'data' => [$userrisk],
+                        'options' => ['placeholder' => '<--คลิกเลือกผู้รายงาน-->'],
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                        'pluginOptions' => [
+                            'depends' => ['riskreports-department_id'],            
+                            'url' => yii\helpers\Url::to(['/riskreports/get-user']),
+                            'loadingText' => 'Loading1...',
                         ],
                     ]);
             ?>

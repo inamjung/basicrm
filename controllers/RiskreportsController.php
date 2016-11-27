@@ -93,6 +93,7 @@ class RiskreportsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             
             $model->createDate = date('Y-m-d');
+            $model->username = Yii::$app->user->identity->username;
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -191,7 +192,27 @@ class RiskreportsController extends Controller
     protected function getRisktype($id){
         $datas = \app\models\Risktypes::find()->where(['programe_id'=>$id])->orderBy('name ASC')->all();
         return $this->MapData($datas,'id','name');
+    }
+
+public function actionGetUser(){
+        $out = [];
+        if (isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != NULL){
+                $department_id = $parents[0];
+                $out = $this->getUser($department_id);
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
     }    
+    
+    protected function getUser($id){
+        $datas = \app\models\Users::find()->where(['department_id'=>$id])->all();
+        return $this->MapData($datas,'id','name');
+    }
+    
     protected function MapData($datas,$fieldID,$fieldName){
         $obj = [];
         foreach ($datas as $key => $value){
