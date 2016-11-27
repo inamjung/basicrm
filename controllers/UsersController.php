@@ -43,6 +43,17 @@ class UsersController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    public function actionIndexuser()
+    {
+        $searchModel = new UsersSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexuser', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single Users model.

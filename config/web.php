@@ -82,7 +82,7 @@ $config = [
             'site/*',
             'admin/*',
             'user/*',
-            
+            'gii/*',
             'some-controller/some-action',
                         
             'clinics/*',
