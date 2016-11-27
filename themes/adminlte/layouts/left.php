@@ -55,7 +55,7 @@
                 <ul class="treeview-menu">
                     <li><a href="<?php echo Url::to(['riskreports/index'])?>">
                         <i class="fa fa-circle text-green"></i> 
-                        <span> คลินิก</span> 
+                        <span> รายงานความเสี่ยง</span> 
                         <small class="label pull-right bg-blue"></small>
                         </a>
                     </li>
