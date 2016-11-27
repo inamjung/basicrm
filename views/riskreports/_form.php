@@ -12,6 +12,7 @@ use kartik\depdrop\DepDrop;
 use kartik\checkbox\CheckboxX;
 use yii\helpers\Url;
 use dosamigos\datepicker\DatePicker;
+//use app\models\User;
 
 
 /* @var $this yii\web\View */
@@ -70,11 +71,30 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'edit')->inline()->radioList(app\models\Riskreports::itemAlias('edit')) ?>
 
-    <?= $form->field($model, 'user_id_report')->textInput() ?>
+    <?= $form->field($model, 'user_id_report')->textInput(['maxlength' => true]) ?>
+            ?>
 
-    <?= $form->field($model, 'department_id')->textInput() ?>
+    <?= $form->field($model, 'department_id')->widget(Select2::className(), [
+                        'data' =>  ArrayHelper::map(\app\models\Departments::find()->all(), 'id', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกหน่วยงานที่รายงาน-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
-    <?= $form->field($model, 'department_id_risk')->textInput() ?>
+    <?= $form->field($model, 'department_id_risk')->widget(Select2::className(), [
+                        'data' =>  ArrayHelper::map(app\models\DepartmentsRisk::find()->all(), 'id', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกพื้นที่เกิดเหตุ-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
 
     <?= $form->field($model, 'edit_begin')->textarea(['rows' => 6]) ?>
 
