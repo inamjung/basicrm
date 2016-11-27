@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use yii\models\Clinics;
@@ -53,7 +54,7 @@ use dosamigos\datepicker\DatePicker;
     <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>  
-    
+    <?php //echo $form->field($model, 'namecode')->inline()->radioList(app\models\Riskreports::itemAlias('namecode')) ?>
     <?= $form->field($model, 'namecode')->widget(Select2::className(), [
                 'data' =>  ArrayHelper::map(\app\models\Levels::find()->all(), 'namecode', 'name'),
                         'options' => [
@@ -65,9 +66,9 @@ use dosamigos\datepicker\DatePicker;
                     ]);
             ?>
 
-    <?= $form->field($model, 'sufferer')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sufferer')->inline()->radioList(app\models\Riskreports::itemAlias('sufferer')) ?>
 
-    <?= $form->field($model, 'edit')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'edit')->inline()->radioList(app\models\Riskreports::itemAlias('edit')) ?>
 
     <?= $form->field($model, 'user_id_report')->textInput() ?>
 
@@ -81,9 +82,13 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'moneydetail')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'how')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'how')->inline()->radioList(app\models\Riskreports::itemAlias('how')) ?>
 
-    <?= $form->field($model, 'review')->textInput() ?>
+    <?= $form->field($model, 'review')->widget(CheckboxX::className(),[
+        'pluginOptions'=>[
+            'threeState'=>FALSE
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'reviewdate')->textInput() ?>
 
