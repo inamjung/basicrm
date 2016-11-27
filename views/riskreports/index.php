@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\RiskreportsSearch */
@@ -24,28 +24,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'date',
             'clinic_id',
             'programe_id',
             'risktype_id',
-            // 'name:ntext',
+            'name:ntext',
             // 'description:ntext',
-            // 'namecode',
+            'namecode',
             // 'sufferer',
             // 'edit',
             // 'user_id_report',
-            // 'department_id',
-            // 'department_id_risk',
+            'department_id',
+            'department_id_risk',
             // 'edit_begin:ntext',
             // 'money',
             // 'moneydetail',
             // 'how',
-            // 'review',
+            'review',
             // 'reviewdate',
             // 'reviewdetail:ntext',
             // 'reviewteam',
-            // 'approve',
+            'approve',
             // 'qaapprove',
             // 'review_in',
             // 'review_by',
