@@ -35,14 +35,39 @@
         );
         ?>
         
-            <?php if(Yii::$app->user->identity->role==  app\models\Users::ROLE_ADMIN){ ?>                
+        <?php if (Yii::$app->user->identity->role == app\models\Users::ROLE_SUPERADMIN){?>
+        <ul class="sidebar-menu">
+            <li class="treeview"> 
+                <a href="#">
+                    <i class="glyphicon glyphicon-cog"></i> <span>จัดการสมาชิก</span>
+                    <i class="fa pull-right fa-angle-down"></i>
+                </a>
+                <ul class="treeview-menu">
+                    
+                    <li><a href="<?php echo Url::to(['users/index'])?>">
+                        <i class="fa fa-circle text-green"></i> 
+                        <span> จัดการสมาชิก</span> 
+                        <small class="label pull-right bg-blue"></small>
+                        </a>
+                    </li>
+                </ul>
+        </ul> 
+        <?php }?> 
+        
+        <?php if(Yii::$app->user->identity->role==  app\models\Users::ROLE_ADMIN){ ?>                
         <ul class="sidebar-menu">
             <li class="treeview"> 
                 <a href="#">
                     <i class="glyphicon glyphicon-cog"></i> <span>ตั้งค่าระบบ</span>
                     <i class="fa pull-right fa-angle-down"></i>
                 </a>
-                <ul class="treeview-menu">
+                <ul class="treeview-menu">                    
+                    <li><a href="<?php echo Url::to(['users/index'])?>">
+                        <i class="fa fa-circle text-green"></i> 
+                        <span> จัดการสมาชิก</span> 
+                        <small class="label pull-right bg-blue"></small>
+                        </a>
+                    </li>                  
                     <li><a href="<?php echo Url::to(['clinics/index'])?>">
                         <i class="fa fa-circle text-green"></i> 
                         <span> คลินิก</span> 

@@ -41,7 +41,9 @@ class Users extends \yii\db\ActiveRecord
     const ROLE_ADMIN = 20;
     const ROLE_EDITOR = 30;
     
-    public static $roles = [10 => 'user', 20 => 'adin', 30 => 'editor'];
+    const ROLE_SUPERADMIN = 40;
+    
+    public static $roles = [10 => 'user', 20 => 'adin', 30 => 'editor',40=>'superadmin'];
 
 
     public $avatar_img; 

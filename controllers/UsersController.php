@@ -112,6 +112,24 @@ class UsersController extends Controller
             ]);
         }
     }
+    public function actionUpdateadmin($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $file = UploadedFile::getInstance($model,'avatar_img');
+             if(isset($file->size)&& $file->size!=0){
+                $model->avatar = $file->name;
+                $file->saveAs('avatars/'.$file->name); 
+                }
+                $model->save();
+            return $this->redirect(['indexuser']);
+        } else {
+            return $this->render('updateadmin', [
+                'model' => $model,
+            ]);
+        }
+    }
 
     /**
      * Deletes an existing Users model.
