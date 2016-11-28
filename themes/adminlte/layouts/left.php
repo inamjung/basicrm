@@ -34,7 +34,7 @@
                 ]
         );
         ?>
-        
+        <?php if(!Yii::$app->user->isGuest){ ?>
         <?php if (Yii::$app->user->identity->role == app\models\Users::ROLE_SUPERADMIN){?>
         <ul class="sidebar-menu">
             <li class="treeview"> 
@@ -61,13 +61,8 @@
                     <i class="glyphicon glyphicon-cog"></i> <span>ตั้งค่าระบบ</span>
                     <i class="fa pull-right fa-angle-down"></i>
                 </a>
-                <ul class="treeview-menu">                    
-                    <li><a href="<?php echo Url::to(['users/index'])?>">
-                        <i class="fa fa-circle text-green"></i> 
-                        <span> จัดการสมาชิก</span> 
-                        <small class="label pull-right bg-blue"></small>
-                        </a>
-                    </li>                  
+                <ul class="treeview-menu">                   
+                                    
                     <li><a href="<?php echo Url::to(['clinics/index'])?>">
                         <i class="fa fa-circle text-green"></i> 
                         <span> คลินิก</span> 
@@ -142,7 +137,25 @@
                     
                 </ul>
         </ul> 
-
+        
+        <ul class="sidebar-menu">
+            <li class="treeview active"> 
+                <a href="#">
+                    <i class="glyphicon glyphicon-cog"></i> <span>รายงาน</span>
+                    <i class="fa pull-right fa-angle-down"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo Url::to(['report/report1'])?>">
+                        <i class="fa fa-circle text-red"></i> 
+                        <span> ความเสี่ยงตามแผนกที่รายงาน</span> 
+                        <small class="label pull-right bg-blue"></small>
+                        </a>
+                    </li>                                       
+                </ul>
+        </ul> 
+        
+<?php } ?>
+        
     </section>
 
 </aside>
