@@ -2,6 +2,7 @@
     use yii\helpers\Url;
     use yii\bootstrap\Nav;
     use yii\helpers\Html;
+    
 ?>
 <aside class="main-sidebar">
 
@@ -122,13 +123,20 @@
                     <li><a href="<?php echo Url::to(['riskreports/indexriskuser'])?>">
                         <i class="fa fa-circle text-green"></i> 
                         <span> ความเสี่ยงของฝ่ายเขียน</span> 
-                        <small class="label pull-right bg-blue"></small>
+                        <small class="label pull-right bg-blue">
+                            <?php echo app\models\Riskreports::find()->where(['department_id'=> Yii::$app->user->identity->department_id])->count()?>
+                        </small>
                         </a>
                     </li>
                     <li><a href="<?php echo Url::to(['riskreports/indexriskdepuser'])?>">
                         <i class="fa fa-circle text-yellow"></i> 
                         <span> เกิดที่ฝ่าย</span> 
-                        <small class="label pull-right bg-blue"></small>
+                        <small class="label pull-right bg-blue">
+                            <?php echo app\models\Riskreports::find()->where(['department_id'=> '6'])
+                                                                     //->andWhere(['approve'=>0])
+                                                                         
+                                                                ->count()?>
+                        </small>
                         </a>
                     </li>
                     
