@@ -39,11 +39,10 @@ class Users extends \yii\db\ActiveRecord
      */
     const ROLE_USER = 10;
     const ROLE_ADMIN = 20;
-    const ROLE_EDITOR = 30;
-    
+    const ROLE_EDITOR = 30;    
     const ROLE_SUPERADMIN = 40;
     
-    public static $roles = [10 => 'user', 20 => 'adin', 30 => 'editor',40=>'superadmin'];
+    public static $roles = [10 => 'user', 20 => 'admin', 30 => 'editor',40=>'superadmin'];
 
 
     public $avatar_img; 
@@ -68,7 +67,7 @@ class Users extends \yii\db\ActiveRecord
             [['role'], 'string', 'max' => 2],
             [['username'], 'unique'],
             [['email'], 'unique'],
-            [['role'], 'default','value'=>10],
+            [['role'],'default' ,'value'=> '10'],
             [['avatar_img'],'file','skipOnEmpty'=>'true','on'=>'update','extensions'=>'jpg,png']
         ];
     }
