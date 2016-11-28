@@ -35,6 +35,7 @@
         );
         ?>
         
+            <?php if(Yii::$app->user->identity->role==  app\models\Users::ROLE_ADMIN){ ?>                
         <ul class="sidebar-menu">
             <li class="treeview"> 
                 <a href="#">
@@ -62,6 +63,8 @@
                     </li>
                 </ul>
         </ul> 
+    <?php } ?>
+    <?php if(Yii::$app->user->identity->role==  app\models\Users::ROLE_EDITOR){ ?>    
         
         <ul class="sidebar-menu">
             <li class="treeview active"> 
@@ -81,10 +84,10 @@
                         <span> รายงานความเสี่ยง</span> 
                         <small class="label pull-right bg-blue"></small>
                         </a>
-                    </li>
-                    
+                    </li>                    
                 </ul>
         </ul> 
+    <?php } ?>    
 <ul class="sidebar-menu">
             <li class="treeview active"> 
                 <a href="#">

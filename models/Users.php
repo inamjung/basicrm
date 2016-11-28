@@ -37,6 +37,13 @@ class Users extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    const ROLE_USER = 10;
+    const ROLE_ADMIN = 20;
+    const ROLE_EDITOR = 30;
+    
+    public static $roles = [10 => 'user', 20 => 'adin', 30 => 'editor'];
+
+
     public $avatar_img; 
     public static function tableName()
     {
@@ -59,6 +66,7 @@ class Users extends \yii\db\ActiveRecord
             [['role'], 'string', 'max' => 2],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['role'], 'default','value'=>10],
             [['avatar_img'],'file','skipOnEmpty'=>'true','on'=>'update','extensions'=>'jpg,png']
         ];
     }
