@@ -34,7 +34,8 @@
                 ]
         );
         ?>
-      
+        <?php if(!Yii::$app->user->isGuest){ ?>
+        <?php if (Yii::$app->user->identity->role == app\models\Users::ROLE_SUPERADMIN){?>
         <ul class="sidebar-menu">
             <li class="treeview"> 
                 <a href="#">
@@ -51,7 +52,9 @@
                     </li>
                 </ul>
         </ul> 
-                   
+        <?php }?> 
+        
+        <?php if(Yii::$app->user->identity->role==  app\models\Users::ROLE_ADMIN){ ?>                
         <ul class="sidebar-menu">
             <li class="treeview"> 
                 <a href="#">
@@ -80,7 +83,8 @@
                     </li>
                 </ul>
         </ul> 
-     
+    <?php } ?>
+    <?php if(Yii::$app->user->identity->role==  app\models\Users::ROLE_EDITOR){ ?>    
         
         <ul class="sidebar-menu">
             <li class="treeview active"> 
@@ -103,7 +107,7 @@
                     </li>                    
                 </ul>
         </ul> 
-   
+    <?php } ?>  
         
 <ul class="sidebar-menu">
             <li class="treeview active"> 
@@ -151,6 +155,7 @@
                 </ul>
         </ul> 
         
+<?php } ?>
         
     </section>
 
