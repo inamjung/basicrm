@@ -35,16 +35,69 @@ use dosamigos\datepicker\DatePicker;
             'autoclose' => true,
             'format' => 'yyyy-mm-dd',
             'todayHighlight'=>true
+        ],
+        'options'=>[
+            'disabled'=>true
         ]
 ]);?>
         </div>
     </div>
     <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <?=
+            $form->field($model, 'clinic_id')->widget(Select2::className(), [
+                'data' =>  ArrayHelper::map(app\models\Clinics::find()->all(), 'id', 'name'),
+                        'options' => [
+                        'placeholder' => '<--คลิกเลือกประเภทคลินิก-->'],                        
+                        'pluginOptions' =>
+                        [
+                            'allowClear' => true
+                        ],
+                    ]);
+            ?>
+        </div>
+        <div class="col-xs-8 col-sm-8 col-md-8">
+            <?=
+            $form->field($model, 'programe_id')->widget(DepDrop::className(), [
+                        'data' => [$programe],
+                        'options' => ['placeholder' => '<--คลิกเลือกหรือพิมพ์ชื่อโปรแกรม-->'],
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                        'pluginOptions' => [
+                            'depends' => ['riskreports-clinic_id'],            
+                            'url' => yii\helpers\Url::to(['/riskreports/get-programe']),
+                            'loadingText' => 'Loading1...',
+                        ],
+                    ]);
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <?=
+            $form->field($model, 'risktype_id')->widget(DepDrop::className(), [
+                        'data' => [$risktype],
+                        'options' => ['placeholder' => '<--คลิกเลือกหรือพิมพ์รายการความเสี่ยง-->',
+                            //'disabled'=>true, 
+                            ],                        
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options' => ['pluginOptions' => ['allowClear' => true]],
+                        'pluginOptions' => [
+                            'depends' => ['riskreports-clinic_id', 'riskreports-programe_id'],            
+                            'url' => yii\helpers\Url::to(['/riskreports/get-risktype']),
+                            'loadingText' => 'Loading2...',
+                        ],
+                    ]);
+            ?>
+        </div>
+       
+    </div>
+    <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
-            <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?> 
+            <?= $form->field($model, 'name')->textarea(['rows' => 6,'readonly'=>true]) ?> 
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?> 
+            <?= $form->field($model, 'description')->textarea(['rows' => 6,'readonly'=>true]) ?> 
         </div>
     </div>
     <div class="row">
@@ -110,7 +163,7 @@ use dosamigos\datepicker\DatePicker;
             <?= $form->field($model, 'edit')->inline()->radioList(app\models\Riskreports::itemAlias('edit')) ?>           
         </div>
         <div class="col-xs-5 col-sm-5 col-md-5">
-            <?= $form->field($model, 'edit_begin')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'edit_begin')->textarea(['rows' => 6,'readonly'=>true]) ?>
         </div>
     </div>
      <div class="row">       

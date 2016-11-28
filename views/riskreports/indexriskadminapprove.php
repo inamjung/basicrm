@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Riskreports', ['create'], ['class' => 'btn btn-success']) ?>
     </p>-->
     <div class="panel panel-primary">
-        <div class="panel-heading"> รายการความเสี่ยงของหน่วยงาน</div>
+        <div class="panel-heading"> รายการความเสี่ยงที่รายงานมาใหม่</div>
         <div class="panel-body">
             <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -83,7 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'complete',
             // 'createDate',
             // 'updateDate',
-            [
+
+           [
                 'class' => 'yii\grid\ActionColumn',
                 'options'=>['style'=>'width:120px;'],
                 'template'=>'<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}</div>',
@@ -92,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        return Html::a('<i class="glyphicon glyphicon-eye-open"></i>',$url,['class'=>'btn btn-default']);
 //                    }, 
                      'update'=>function($url,$model,$key){
-                        return Html::a('ทบทวน', ['riskreports/updateuser', 'id' => $model->id], ['class' => 'btn btn-warning']);
+                        return Html::a('APPROVE', ['riskreports/updateadmin', 'id' => $model->id], ['class' => 'btn btn-warning']);
                     }, 
 //                    'delete'=>function($url,$model,$key){
 //                         return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url,[
@@ -104,9 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                ]);
 //                    }
                 ]
-            ], 
-
-            //['class' => 'yii\grid\ActionColumn'],
+            ],
         ],
     ]); ?>
         </div>

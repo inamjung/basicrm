@@ -37,6 +37,7 @@ class Users extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $avatar_img; 
     public static function tableName()
     {
         return 'user';
@@ -51,13 +52,14 @@ class Users extends \yii\db\ActiveRecord
             [['username', 'email', 'password_hash', 'auth_key', 'created_at', 'updated_at'], 'required'],
             [['confirmation_sent_at', 'confirmed_at', 'recovery_sent_at', 'blocked_at', 'registered_from', 'logged_in_from', 'logged_in_at', 'created_at', 'updated_at', 'department_id', 'position_id', 'degree_id'], 'integer'],
             [['username'], 'string', 'max' => 25],
-            [['email', 'unconfirmed_email', 'name', 'depname'], 'string', 'max' => 255],
+            [['avatar','email', 'unconfirmed_email', 'name', 'depname'], 'string', 'max' => 255],
             [['password_hash'], 'string', 'max' => 60],
             [['auth_key', 'confirmation_token', 'recovery_token'], 'string', 'max' => 32],
             [['registration_ip'], 'string', 'max' => 45],
             [['role'], 'string', 'max' => 2],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['avatar_img'],'file','skipOnEmpty'=>'true','on'=>'update','extensions'=>'jpg,png']
         ];
     }
 
@@ -91,6 +93,7 @@ class Users extends \yii\db\ActiveRecord
             'degree_id' => 'ระดับ',
             'name' => 'ชื่อ-สกุล',
             'depname' => 'ชื่อหน่วยงาน',
+            'avatar'=>'รูปประจำตัว'
         ];
     }
 }

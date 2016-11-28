@@ -12,13 +12,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="riskreports-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_formuser', [
-        'model' => $model,
-        'programe'=>[],
-        'risktype'=>[],
-        'userrisk'=>[]
-    ]) ?>
-
+    <div class="panel panel-success">
+        <div class="panel-heading"> เขียนความเสี่ยง</div>
+        <div class="panel-body">
+            <?=
+            $this->render('_formuser', [
+                'model' => $model,
+                'programe' => [],
+                'risktype' => [],
+                'userrisk' => [],
+            ])
+            ?>
+        </div>
+    </div>
 </div>

@@ -64,6 +64,28 @@ class RiskreportsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+     public function actionIndexriskdepuser()
+    {
+        $searchModel = new RiskreportsSearch(['approve'=> 1]);
+        $searchModel->department_id_risk = Yii::$app->user->identity->depname;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexriskdepuser', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionIndexriskadminapprove()
+    {
+        $searchModel = new RiskreportsSearch(['approve'=>0]);        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('indexriskadminapprove', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single Riskreports model.
@@ -127,6 +149,7 @@ class RiskreportsController extends Controller
 
         $programe = ArrayHelper::map($this->getPrograme($model->clinic_id),'id','name');
         $risktype = ArrayHelper::map($this->getRisktype($model->programe_id),'id','name');
+        $userrisk = ArrayHelper::map($this->getuser($model->user_id_report),'id','name');
         
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -136,6 +159,48 @@ class RiskreportsController extends Controller
                 'model' => $model,
                 'programe'=>$programe,
                 'risktype'=>$risktype,
+                'userrisk'=>$userrisk,
+            ]);
+        }
+    }
+     public function actionUpdateuser($id)
+    {
+        $model = $this->findModel($id);
+
+        $programe = ArrayHelper::map($this->getPrograme($model->clinic_id),'id','name');
+        $risktype = ArrayHelper::map($this->getRisktype($model->programe_id),'id','name');
+        $userrisk = ArrayHelper::map($this->getuser($model->user_id_report),'id','name');
+        
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['indexriskuser']);
+        } else {
+            return $this->render('updateuser', [
+                'model' => $model,
+                'programe'=>$programe,
+                'risktype'=>$risktype,
+                'userrisk'=>$userrisk,
+            ]);
+        }
+    }
+    
+    public function actionUpdateadmin($id)
+    {
+        $model = $this->findModel($id);
+
+        $programe = ArrayHelper::map($this->getPrograme($model->clinic_id),'id','name');
+        $risktype = ArrayHelper::map($this->getRisktype($model->programe_id),'id','name');
+        $userrisk = ArrayHelper::map($this->getuser($model->user_id_report),'id','name');
+        
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['indexriskuser']);
+        } else {
+            return $this->render('updateadmin', [
+                'model' => $model,
+                'programe'=>$programe,
+                'risktype'=>$risktype,
+                'userrisk'=>$userrisk,
             ]);
         }
     }
